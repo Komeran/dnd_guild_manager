@@ -1,0 +1,14 @@
+<div style="text-align:center; position: relative; margin-left: 400px; width: auto; float: left;">
+  <p>Select a player by clicking on his user name to show details</p>
+  <p>Players:</p>
+  <table align="center" style="cursor: pointer;">
+    <tr *ngFor="let player of players">
+      <td><a (click)="selectPlayer(player)"><b *ngIf="selectedPlayer === player">>></b><b>{{ player.username }}</b><b *ngIf="selectedPlayer === player"><<</b></a></td>
+    </tr>
+  </table>
+</div>
+<app-player-details
+  *ngIf="!!selectedPlayer"
+  [Player]="selectedPlayer"
+>
+</app-player-details>

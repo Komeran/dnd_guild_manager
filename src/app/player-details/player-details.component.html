@@ -1,0 +1,8 @@
+<div style="border-radius: 3px; border: 3px black; position: relative; margin-left: 100px; width: auto; float:left;">
+  <h3>{{ Player.username }}</h3>
+  <p><b>Vorname: </b> {{Player.firstname || "N/A"}} </p>
+  <p><b>Nachname: </b> {{Player.lastname || "N/A"}} </p>
+  <p><b>Tel.: </b> {{Player.getPhone() || "N/A"}} </p>
+  <p><b>E-Mail: </b> {{Player.getEmail() || "N/A"}} </p>
+  <p><b>Discord: </b> {{Player.getDiscordId() || "N/A"}} </p>
+</div>

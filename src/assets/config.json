@@ -1,0 +1,9 @@
+{
+  "backend": {
+    "url": "http://localhost/dnd_guild/",
+    "players": {
+      "subdirectory": "",
+      "get": "get_players.php"
+    }
+  }
+}
