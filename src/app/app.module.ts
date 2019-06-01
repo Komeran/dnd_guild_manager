@@ -7,6 +7,17 @@ import { CharactersComponent } from './characters/characters.component';
 import { ItemsComponent } from './items/items.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import {HttpClientModule} from '@angular/common/http';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule, MatDividerModule, MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatMenuModule,
+  MatTableModule, MatTabsModule,
+  MatToolbarModule, MatTooltipModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +25,26 @@ import {HttpClientModule} from '@angular/common/http';
     PlayersComponent,
     CharactersComponent,
     ItemsComponent,
-    PlayerDetailsComponent
+    PlayerDetailsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatTableModule,
+    MatChipsModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

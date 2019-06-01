@@ -20,9 +20,21 @@ export class PlayersComponent implements OnInit {
 
   public players: Array<Player> = new Array<Player>();
   public selectedPlayer: Player;
+  public fallbackPlayer: Player;
+  public edit: boolean = false;
+  public new: boolean = false;
 
   public selectPlayer(player:Player) {
     this.selectedPlayer = player;
+    this.edit = false;
+    this.new = false;
+  }
+
+  public newPlayer() {
+    this.fallbackPlayer = this.selectedPlayer;
+    this.selectedPlayer = new Player("");
+    this.new = true;
+    this.edit = true;
   }
 
 }

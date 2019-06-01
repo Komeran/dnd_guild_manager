@@ -1,8 +1,92 @@
-<div style="border-radius: 3px; border: 3px black; position: relative; margin-left: 100px; width: auto; float:left;">
-  <h3>{{ Player.username }}</h3>
-  <p><b>Vorname: </b> {{Player.firstname || "N/A"}} </p>
-  <p><b>Nachname: </b> {{Player.lastname || "N/A"}} </p>
-  <p><b>Tel.: </b> {{Player.getPhone() || "N/A"}} </p>
-  <p><b>E-Mail: </b> {{Player.getEmail() || "N/A"}} </p>
-  <p><b>Discord: </b> {{Player.getDiscordId() || "N/A"}} </p>
-</div>
+<mat-card style="width: auto; margin-bottom: 10px;" class="mat-elevation-z5">
+  <!-- EDIT / ADD NEW MODE -->
+  <div *ngIf="edit">
+    <h3 *ngIf="edit&&new">Spieler hinzufügen</h3>
+    <h3 *ngIf="edit&&!new">Spieler bearbeiten</h3>
+    <mat-divider inset></mat-divider>
+    <form [formGroup]="playerForm" (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <mat-form-field style="width:100%;">
+        <input matInput placeholder="Username" formControlName="username"
+               [errorStateMatcher]="matcher"
+               required
+        >
+        <mat-error *ngIf="playerForm.controls.username.hasError('required')">
+          Username <strong>darf nicht leer sein</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <!-- First Name -->
+      <mat-form-field style="width:50%;">
+        <input matInput placeholder="Vorname" formControlName="firstname">
+      </mat-form-field>
+      <!-- Last Name -->
+      <mat-form-field style="width:50%;">
+        <input matInput placeholder="Nachname" formControlName="lastname">
+      </mat-form-field>
+      <br>
+
+      <!-- Phone -->
+      <mat-form-field style="width:100%;">
+        <input matInput placeholder="Tel." formControlName="phone">
+      </mat-form-field>
+      <br>
+
+      <!-- Mail -->
+      <mat-form-field style="width:100%;">
+        <input matInput placeholder="E-Mail" formControlName="email" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="playerForm.controls.email.hasError('email')">
+          Bitte geben Sie eine <strong>gültige E-Mail</strong> ein!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <!-- Discord -->
+      <mat-form-field style="width:100%;">
+        <input matInput placeholder="Discord Handle" formControlName="discordid">
+      </mat-form-field>
+
+        <button mat-raised-button type="submit" [disabled]="!playerForm.valid" *ngIf="edit&&new">
+          <mat-icon>save</mat-icon>
+          Hinzufügen
+        </button>
+        <button mat-raised-button (click)="cancelNewPlayer()" style="margin-left:20px;" *ngIf="edit&&new">
+          <mat-icon>cancel</mat-icon>
+          Abbrechen
+        </button>
+
+        <button mat-raised-button type="submit" [disabled]="!playerForm.valid" *ngIf="edit&&!new">
+          <mat-icon>save</mat-icon>
+          Speichern
+        </button>
+        <button mat-raised-button (click)="edit=false;clearEditValues()" style="margin-left:20px;" *ngIf="edit&&!new">
+          <mat-icon>cancel</mat-icon>
+          Abbrechen
+        </button>
+    </form>
+  </div>
+
+  <!-- VIEW MODE -->
+  <div *ngIf="!edit">
+    <span class="mat-card-title">
+      {{ player.username }}
+      <button mat-icon-button class="mat-raised-button mat-elevation-z5" style="float:right;top:-10px" matTooltip="Bearbeiten"
+              (click)="editSelectedPlayer()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </span>
+    <mat-divider inset></mat-divider>
+    <p class="mat-card-content"><b>Vorname: </b> {{player.firstname || "N/A"}} </p>
+    <p class="mat-card-content"><b>Nachname: </b> {{player.lastname || "N/A"}} </p>
+    <p class="mat-card-content"><b>Tel.: </b> {{player.getPhone() || "N/A"}} </p>
+    <span class="mat-card-content">
+      <b>E-Mail: </b>
+      <a href="mailto:{{player.getEmail()}}" *ngIf="!!player.getEmail();else notLinked">{{player.getEmail()}}</a>
+      <ng-template #notLinked>N/A</ng-template>
+    </span>
+    <p class="mat-card-content"><b>Discord: </b> {{player.getDiscordId() || "N/A"}} </p>
+  </div>
+</mat-card>
+

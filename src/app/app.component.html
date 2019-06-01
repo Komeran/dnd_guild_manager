@@ -1,7 +1,39 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
+<
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
 </div>
-<app-players></app-players>
+
+<mat-card style="width:70%; position:relative; float:top; margin:auto;" class="mat-elevation-z5">
+  <mat-tab-group dynamicHeight mat-stretch-tabs>
+    <!-- Players Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>supervised_user_circle</mat-icon>
+        Players
+      </ng-template>
+      <app-players></app-players>
+    </mat-tab>
+
+    <!-- Characters Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>supervisor_account</mat-icon>
+        Characters
+      </ng-template>
+      <app-characters></app-characters>
+    </mat-tab>
+
+    <!-- Items Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>import_contacts</mat-icon>
+        Items
+      </ng-template>
+      <app-items></app-items>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

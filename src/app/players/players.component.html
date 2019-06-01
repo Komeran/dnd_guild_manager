@@ -1,14 +1,42 @@
-<div style="text-align:center; position: relative; margin-left: 400px; width: auto; float: left;">
-  <p>Select a player by clicking on his user name to show details</p>
-  <p>Players:</p>
-  <table align="center" style="cursor: pointer;">
-    <tr *ngFor="let player of players">
-      <td><a (click)="selectPlayer(player)"><b *ngIf="selectedPlayer === player">>></b><b>{{ player.username }}</b><b *ngIf="selectedPlayer === player"><<</b></a></td>
-    </tr>
-  </table>
+
+<p class="mat-headline" style="margin-top:20px; text-align: center;">Players</p>
+<mat-divider inset></mat-divider>
+
+<div style="width:45%; float:left; padding:20px 0 20px 20px;">
+  <div class="mat-elevation-z5" style="max-height:400px; overflow: auto;">
+    <table mat-table [dataSource]="players" style="width:100%; max-height: 100px;">
+      <!-- Username Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef style="padding-left: 39px;"> Username </th>
+        <td mat-cell *matCellDef="let player"> <button mat-button (click)="selectPlayer(player)">{{player.username}}</button> </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let player"> {{player.firstname}} {{player.lastname}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['username', 'name']; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['username', 'name'];"></tr>
+    </table>
+  </div>
+
+  <p class="mat-body" style="text-align: center;">Select a player by clicking on his user name to show details</p>
 </div>
-<app-player-details
-  *ngIf="!!selectedPlayer"
-  [Player]="selectedPlayer"
->
-</app-player-details>
+<div style="width:45%; float:right; padding:20px 0 20px 20px; position: relative;right:50px;">
+  <app-player-details
+    *ngIf="!!selectedPlayer"
+    [player]="selectedPlayer"
+    [edit]="edit"
+    [new]="new"
+    [newFallback]="fallbackPlayer"
+  >
+  </app-player-details>
+
+  <mat-card style="width: auto;" class="mat-elevation-z5">
+    <button mat-icon-button matTooltip="Spieler hinzufügen" class="mat-elevation-z5" (click)="newPlayer()">
+      <mat-icon>person_add</mat-icon>
+    </button>
+  </mat-card>
+</div>

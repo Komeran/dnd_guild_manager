@@ -3,7 +3,9 @@
     "url": "http://localhost/dnd_guild/",
     "players": {
       "subdirectory": "",
-      "get": "get_players.php"
+      "get": "get_players.php",
+      "update": "update_player.php",
+      "add": "add_player.php"
     }
   }
 }
